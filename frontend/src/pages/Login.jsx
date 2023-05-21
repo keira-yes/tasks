@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAsync } from "../features/auth/authSlice";
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -8,6 +10,9 @@ const Login = () => {
     });
 
     const { email, password } = formData;
+
+    const dispatch = useDispatch();
+    const { user } = useSelector(state => state.auth);
 
     const onChangeInput = e => {
         setFormData(prevState => ({
@@ -19,7 +24,11 @@ const Login = () => {
     const onSubmit = e => {
         e.preventDefault();
 
-        console.log(formData);
+        const userData = {
+            email,
+            password
+        }
+        dispatch(loginAsync(userData));
     }
 
     return (

@@ -8,7 +8,14 @@ const initialState = {
 export const registerAsync = createAsyncThunk(
     "auth/register",
     async user => {
-        console.log(user)
+        console.log(user);
+    }
+)
+
+export const loginAsync = createAsyncThunk(
+    "auth/login",
+    async user => {
+        console.log(user);
     }
 )
 
