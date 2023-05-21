@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { registerAsync } from "../features/auth/authSlice";
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -11,6 +13,9 @@ const Register = () => {
     });
 
     const { name, email, password, confirmPassword } = formData;
+
+    const dispatch = useDispatch();
+    const { user } = useSelector(state => state.auth);
 
     const onChangeInput = e => {
         setFormData(prevState => ({
@@ -24,10 +29,14 @@ const Register = () => {
 
         if (password !== confirmPassword) {
             toast.error("Passwords are not equal");
-            return;
+        } else {
+            const userData = {
+                name,
+                email,
+                password
+            }
+            dispatch(registerAsync(userData));
         }
-
-        console.log(formData);
     }
 
     return (

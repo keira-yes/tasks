@@ -253,7 +253,7 @@ h6 {
 
 #main {
     flex: 1;
-    padding: 40px 0 60px;
+    padding: 60px 0;
 }
 
 .container {
@@ -334,7 +334,8 @@ h6 {
 /* Header *********************************************************************************/
 
 .header {
-    padding: 15px 0;
+    border-bottom: 1px solid rgba(171, 84, 219, 0.15);
+    padding: 10px 0;
 }
 
 .header__container {
@@ -414,11 +415,12 @@ h6 {
 /* Footer **************************************************************************************/
 
 .footer {
+    border-top: 1px solid rgba(171, 84, 219, 0.15);
     padding: 15px 0;
-    background-color: rgba(171, 84, 219, 0.15);
     text-align: center;
 }
 
 .footer__text {
+    font-size: 14px;
     font-weight: 500;
 }
