@@ -5,7 +5,7 @@ const Header = () => {
     return (
         <header className="header">
             <div className="header__container container">
-                <Link to='/'>
+                <Link to='/' className="header__logo">
                     <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M34.3757 9.375H11.459V13.5417H34.3757C35.5215 13.5417 36.459 14.4792 36.459 15.625V36.4583H23.959V40.625H40.6257V15.625C40.6257 12.1875 37.8132 9.375 34.3757 9.375Z" fill="#AB54DB" fillOpacity="0.15"/>
                         <path d="M16.6667 6.25H6.25V16.6667H16.6667V6.25Z" fill="#AB54DB"/>
@@ -16,8 +16,8 @@ const Header = () => {
                     </svg>
                 </Link>
                 <nav className="header__nav">
-                    <Link to="/login" className="header__link"><CiLogin /> Login</Link>
-                    <Link to="/register" className="header__link"><CiUser /> Register</Link>
+                    <Link to="/login" className="header__link"><CiLogin />Login</Link>
+                    <Link to="/register" className="header__link"><CiUser />Register</Link>
                 </nav>
             </div>
         </header>

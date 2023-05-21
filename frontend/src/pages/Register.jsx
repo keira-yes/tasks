@@ -43,7 +43,7 @@ const Register = () => {
                             className="form__input"
                             name="name"
                             value={name}
-                            placeholder="Name"
+                            placeholder="Name*"
                             onChange={onChangeInput}
                             required
                         />
@@ -56,7 +56,7 @@ const Register = () => {
                             className="form__input"
                             name="email"
                             value={email}
-                            placeholder="Email"
+                            placeholder="Email*"
                             onChange={onChangeInput}
                             required
                         />
@@ -69,7 +69,7 @@ const Register = () => {
                             className="form__input"
                             name="password"
                             value={password}
-                            placeholder="Password"
+                            placeholder="Password*"
                             onChange={onChangeInput}
                             required
                         />
@@ -82,7 +82,7 @@ const Register = () => {
                             className="form__input"
                             name="confirmPassword"
                             value={confirmPassword}
-                            placeholder="Confirm password"
+                            placeholder="Confirm password*"
                             onChange={onChangeInput}
                             required
                         />

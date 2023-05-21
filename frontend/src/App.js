@@ -12,7 +12,7 @@ function App() {
         <>
             <BrowserRouter>
                 <Header />
-                <main className="main">
+                <main id="main">
                     <div className="main__container container">
                         <Routes>
                             <Route path="/" element={<Home />} />

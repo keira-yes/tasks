@@ -35,7 +35,7 @@ const Login = () => {
                             className="form__input"
                             name="email"
                             value={email}
-                            placeholder="Email"
+                            placeholder="Email*"
                             onChange={onChangeInput}
                             required
                         />
@@ -48,7 +48,7 @@ const Login = () => {
                             className="form__input"
                             name="password"
                             value={password}
-                            placeholder="Password"
+                            placeholder="Password*"
                             onChange={onChangeInput}
                             required
                         />
