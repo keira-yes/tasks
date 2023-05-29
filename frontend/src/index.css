@@ -389,13 +389,26 @@ h6 {
 }
 
 .form__submit {
-    margin-top: 40px;
+    position: relative;
+    padding-top: 20px;
     text-align: center;
+}
+
+.form__submit-loader {
+    position: absolute;
+    top: -6px;
+    width: 100%;
 }
 
 .form__footer {
     margin-top: 40px;
     text-align: center;
+}
+
+/* Loader *************************************************************************************/
+
+.loader {
+    line-height: 1;
 }
 
 /* Home ***************************************************************************************/

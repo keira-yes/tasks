@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAsync } from "../features/auth/authSlice";
+import Loader from "../components/Loader";
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -12,7 +13,7 @@ const Login = () => {
     const { email, password } = formData;
 
     const dispatch = useDispatch();
-    const { user } = useSelector(state => state.auth);
+    const { user, isLoading } = useSelector(state => state.auth);
 
     const onChangeInput = e => {
         setFormData(prevState => ({
@@ -63,6 +64,7 @@ const Login = () => {
                         />
                     </div>
                     <div className="form__submit">
+                        {isLoading && <div className="form__submit-loader"><Loader /></div>}
                         <button type="submit" className="form__submit-btn btn btn--accent">Login</button>
                     </div>
                     <footer className="form__footer">Don't have an account? <Link to="/register">Signup</Link></footer>

@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { registerAsync } from "../features/auth/authSlice";
+import { registerAsync, reset } from "../features/auth/authSlice";
+import Loader from "../components/Loader";
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -15,7 +16,23 @@ const Register = () => {
     const { name, email, password, confirmPassword } = formData;
 
     const dispatch = useDispatch();
-    const { user } = useSelector(state => state.auth);
+    const navigate = useNavigate();
+    const { user, isLoading, isSuccess, errorMessage } = useSelector(state => state.auth);
+
+    useEffect(() => {
+        if (errorMessage) {
+            toast.error(errorMessage);
+        }
+
+        if (isSuccess && user) {
+            toast.success(`User ${user.name} was successfully created`);
+            navigate("/");
+        }
+
+        if (errorMessage || isSuccess) {
+            dispatch(reset());
+        }
+    }, [user, isSuccess, errorMessage, dispatch, navigate]);
 
     const onChangeInput = e => {
         setFormData(prevState => ({
@@ -97,6 +114,7 @@ const Register = () => {
                         />
                     </div>
                     <div className="form__submit">
+                        {isLoading && <div className="form__submit-loader"><Loader /></div>}
                         <button type="submit" className="form__submit-btn btn btn--accent">Create account</button>
                     </div>
                     <footer className="form__footer">Do you have an account? <Link to="/login">Login</Link></footer>
