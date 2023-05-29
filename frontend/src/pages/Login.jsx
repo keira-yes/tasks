@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../features/auth/authSlice";
+import { toast } from "react-toastify";
+import { login, reset } from "../features/auth/authSlice";
 import Loader from "../components/Loader";
 
 const Login = () => {
@@ -13,7 +14,23 @@ const Login = () => {
     const { email, password } = formData;
 
     const dispatch = useDispatch();
-    const { user, isLoading } = useSelector(state => state.auth);
+    const navigate = useNavigate();
+    const { user, isLoading, errorMessage, isSuccess } = useSelector(state => state.auth);
+
+    useEffect(() => {
+        if (errorMessage) {
+            toast.error(errorMessage);
+        }
+
+        if (isSuccess && user) {
+            toast.success(`User ${user.name} was successfully logged in`);
+            navigate("/");
+        }
+
+        if (errorMessage || isSuccess) {
+            dispatch(reset());
+        }
+    }, [user, isSuccess, errorMessage, dispatch, navigate]);
 
     const onChangeInput = e => {
         setFormData(prevState => ({
