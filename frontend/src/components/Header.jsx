@@ -1,7 +1,18 @@
-import { Link } from "react-router-dom";
-import { CiLogin, CiUser } from "react-icons/ci";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { CiLogin, CiUser, CiLogout } from "react-icons/ci";
+import { logout } from "../features/auth/authSlice";
 
 const Header = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { user } = useSelector(state => state.auth);
+
+    const onLogout = () => {
+        dispatch(logout());
+        navigate("/");
+    }
+
     return (
         <header className="header">
             <div className="header__container container">
@@ -16,8 +27,19 @@ const Header = () => {
                     </svg>
                 </Link>
                 <nav className="header__nav">
-                    <Link to="/login" className="header__link"><CiLogin />Login</Link>
-                    <Link to="/register" className="header__link"><CiUser />Register</Link>
+                    {user ?
+                        <button
+                            type="button"
+                            className="header__link"
+                            onClick={onLogout}>
+                            <CiLogout /> Logout
+                        </button>
+                        :
+                        <>
+                            <Link to="/login" className="header__link"><CiLogin />Login</Link>
+                            <Link to="/register" className="header__link"><CiUser />Register</Link>
+                        </>
+                    }
                 </nav>
             </div>
         </header>

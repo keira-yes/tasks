@@ -357,7 +357,14 @@ h6 {
     display: flex;
     align-items: center;
     gap: 4px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
     color: inherit;
+}
+
+.header__link:hover {
+    text-decoration: underline;
 }
 
 .header__link svg {

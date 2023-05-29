@@ -10,7 +10,7 @@ const initialState = {
     errorMessage: ""
 }
 
-export const registerAsync = createAsyncThunk(
+export const register = createAsyncThunk(
     "auth/register",
     async (user, thunkAPI) => {
         try {
@@ -22,7 +22,7 @@ export const registerAsync = createAsyncThunk(
     }
 )
 
-export const loginAsync = createAsyncThunk(
+export const login = createAsyncThunk(
     "auth/login",
     async (user) => {
         try {
@@ -30,6 +30,13 @@ export const loginAsync = createAsyncThunk(
         } catch (error) {
             console.log("error", error)
         }
+    }
+)
+
+export const logout = createAsyncThunk(
+    "auth/logout",
+    async () => {
+        await authAPI.logout();
     }
 )
 
@@ -45,17 +52,20 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(registerAsync.pending, (state) => {
+            .addCase(register.pending, (state) => {
                 state.isLoading = true;
             })
-            .addCase(registerAsync.fulfilled, (state, action) => {
+            .addCase(register.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
                 state.user = action.payload;
             })
-            .addCase(registerAsync.rejected, (state, action) => {
+            .addCase(register.rejected, (state, action) => {
                 state.isLoading = false;
                 state.errorMessage = action.payload;
+            })
+            .addCase(logout.fulfilled, (state) => {
+                state.user = null;
             })
     }
 });

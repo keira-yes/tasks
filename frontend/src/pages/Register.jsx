@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { registerAsync, reset } from "../features/auth/authSlice";
+import { register, reset } from "../features/auth/authSlice";
 import Loader from "../components/Loader";
 
 const Register = () => {
@@ -52,7 +52,7 @@ const Register = () => {
                 email,
                 password
             }
-            dispatch(registerAsync(userData));
+            dispatch(register(userData));
         }
     }
 

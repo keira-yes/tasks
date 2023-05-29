@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAsync } from "../features/auth/authSlice";
+import { login } from "../features/auth/authSlice";
 import Loader from "../components/Loader";
 
 const Login = () => {
@@ -29,7 +29,7 @@ const Login = () => {
             email,
             password
         }
-        dispatch(loginAsync(userData));
+        dispatch(login(userData));
     }
 
     return (
