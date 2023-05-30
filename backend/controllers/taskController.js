@@ -6,7 +6,15 @@ const Task = require("../models/taskModel");
 // @route  GET /api/tasks
 // @access Private
 const getTasks = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: "Get tasks" });
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+        res.status(401);
+        throw new Error("User not found");
+    }
+
+    const tasks = await Task.find({ user: req.user.id });
+    res.status(200).json(tasks);
 });
 
 // @desc   Create new task
