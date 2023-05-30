@@ -21,7 +21,28 @@ const getTasks = asyncHandler(async (req, res) => {
 // @route  POST /api/tasks
 // @access Private
 const createTask = asyncHandler(async (req, res) => {
-    res.status(201).json({ message: "Create new task" });
+    const { category, description } = req.body;
+
+    if (!category || !description) {
+        res.status(400);
+        throw new Error("Please add category and description");
+    }
+
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+        res.status(401);
+        throw new Error("User not found");
+    }
+
+    const task = await Task.create({
+        user: req.user.id,
+        category,
+        description,
+        status: "new"
+    });
+
+    res.status(201).json(task);
 });
 
 module.exports = {
