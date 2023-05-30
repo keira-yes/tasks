@@ -45,7 +45,34 @@ const createTask = asyncHandler(async (req, res) => {
     res.status(201).json(task);
 });
 
+// @desc   Get task
+// @route  GET /api/tasks/:id
+// @access Private
+const getTask = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+        res.status(401);
+        throw new Error("User not found");
+    }
+
+    const task = await Task.findById(req.params.id);
+
+    if (!task) {
+        res.status(404);
+        throw new Error("Task not found");
+    }
+
+    if (task.user.toString() !== req.user.id) {
+        res.status(401);
+        throw new Error("Not authorized");
+    }
+
+    res.status(200).json(task);
+});
+
 module.exports = {
     getTasks,
-    createTask
+    createTask,
+    getTask
 }
