@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import NewTask from "./pages/NewTask";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
     return (
@@ -19,7 +20,9 @@ function App() {
                             <Route path="/" element={<Home />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
-                            <Route path="/new-task" element={<NewTask />} />
+                            <Route path="/new-task" element={<PrivateRoute />}>
+                                <Route path="/new-task" element={<NewTask />} />
+                            </Route>
                         </Routes>
                     </div>
                 </main>
