@@ -396,15 +396,8 @@ h6 {
 }
 
 .form__submit {
-    position: relative;
     padding-top: 20px;
     text-align: center;
-}
-
-.form__submit-loader {
-    position: absolute;
-    top: -6px;
-    width: 100%;
 }
 
 .form__footer {
@@ -415,7 +408,17 @@ h6 {
 /* Loader *************************************************************************************/
 
 .loader {
+    position: fixed;
+    top: 71px;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: calc(100vh - 126px);
+    background-color: rgba(243, 242, 247, .9);
     line-height: 1;
+    z-index: 999;
 }
 
 /* Home ***************************************************************************************/
