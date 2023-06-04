@@ -7,8 +7,8 @@ import Loader from "../components/Loader";
 
 const Login = () => {
     const [formData, setFormData] = useState({
-        email: '',
-        password: ''
+        email: "",
+        password: ""
     });
 
     const { email, password } = formData;
