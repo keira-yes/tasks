@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Loader from "../components/Loader";
 import { toast } from "react-toastify";
 import { reset, createTask } from "../features/tasks/tasksSlice";
+import BackNavigation from "../components/BackNavigation";
+import Loader from "../components/Loader";
 
 const NewTask = () => {
     const [formData, setFormData] = useState({
@@ -29,7 +30,7 @@ const NewTask = () => {
         }
 
         if (errorMessage || isSuccess) {
-            // dispatch(reset());
+            dispatch(reset());
         }
     }, [isSuccess, errorMessage, dispatch, navigate]);
 
@@ -47,6 +48,7 @@ const NewTask = () => {
 
     return (
         <div className="new-task">
+            <BackNavigation url="/" />
             <h1 className="new-task__title page-title">Create a new task</h1>
             <div className="new-task__form">
                 <form className="form" name="new-task" onSubmit={onSubmit}>
