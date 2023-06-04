@@ -1,5 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
+import { toast } from "react-toastify";
+import { reset, createTask } from "../features/tasks/tasksSlice";
 
 const NewTask = () => {
     const [formData, setFormData] = useState({
@@ -8,6 +12,26 @@ const NewTask = () => {
     });
 
     const { category, description } = formData;
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const { isLoading, isSuccess, errorMessage } = useSelector((state) => state.tasks);
+
+    useEffect(() => {
+        if (errorMessage) {
+            toast.error(errorMessage);
+        }
+
+        if (isSuccess) {
+            toast.success(`Task was successfully created`);
+            navigate("/tasks");
+        }
+
+        if (errorMessage || isSuccess) {
+            // dispatch(reset());
+        }
+    }, [isSuccess, errorMessage, dispatch, navigate]);
 
     const onChangeInput = e => {
         setFormData(prevState => ({
@@ -18,7 +42,7 @@ const NewTask = () => {
 
     const onSubmit = e => {
         e.preventDefault();
-        console.log(formData);
+        dispatch(createTask(formData));
     }
 
     return (
@@ -55,11 +79,11 @@ const NewTask = () => {
                         </textarea>
                     </div>
                     <div className="form__submit">
-                        {/*{isLoading && <div className="form__submit-loader"><Loader /></div>}*/}
                         <button type="submit" className="form__submit-btn btn btn--accent">Create</button>
                     </div>
                 </form>
             </div>
+            {isLoading && <Loader />}
         </div>
     );
 };

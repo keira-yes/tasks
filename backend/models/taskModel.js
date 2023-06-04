@@ -9,11 +9,11 @@ const taskSchema = mongoose.Schema({
         category: {
             type: String,
             required: [true, "Please select category"],
-            enum: ["Development", "Languages", "Sports"]
+            enum: ["development", "languages", "sports"]
         },
         description: {
             type: String,
-            required: [true, "Please add description of your task"]
+            required: [true, "Please add description of your tasks"]
         },
         status: {
             type: String,

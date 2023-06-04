@@ -114,12 +114,12 @@ const Register = () => {
                         />
                     </div>
                     <div className="form__submit">
-                        {isLoading && <div className="form__submit-loader"><Loader /></div>}
                         <button type="submit" className="form__submit-btn btn btn--accent">Create account</button>
                     </div>
                     <footer className="form__footer">Do you have an account? <Link to="/login">Login</Link></footer>
                 </form>
             </div>
+            {isLoading && <Loader />}
         </div>
     );
 };

@@ -81,12 +81,12 @@ const Login = () => {
                         />
                     </div>
                     <div className="form__submit">
-                        {isLoading && <div className="form__submit-loader"><Loader /></div>}
                         <button type="submit" className="form__submit-btn btn btn--accent">Login</button>
                     </div>
                     <footer className="form__footer">Don't have an account? <Link to="/register">Signup</Link></footer>
                 </form>
             </div>
+            {isLoading && <Loader />}
         </div>
     );
 };
