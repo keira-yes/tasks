@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NewTask from "./pages/NewTask";
+import Tasks from "./pages/Tasks";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import PrivateRoute from "./components/PrivateRoute";
@@ -22,6 +23,9 @@ function App() {
                             <Route path="/register" element={<Register />} />
                             <Route path="/new-task" element={<PrivateRoute />}>
                                 <Route path="/new-task" element={<NewTask />} />
+                            </Route>
+                            <Route path="/tasks" element={<PrivateRoute />}>
+                                <Route path="/tasks" element={<Tasks />} />
                             </Route>
                         </Routes>
                     </div>
