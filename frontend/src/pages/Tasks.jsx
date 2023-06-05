@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { getTasks, reset } from "../features/tasks/tasksSlice";
 import Loader from "../components/Loader";
 import BackNavigation from "../components/BackNavigation";
+import TaskPreview from "../components/TaskPreview";
 
 const Tasks = () => {
     const dispatch = useDispatch();
@@ -29,6 +30,11 @@ const Tasks = () => {
         <div className="tasks">
             <BackNavigation url="/" />
             <h1 className="tasks__title page-title">Tasks</h1>
+            <div className="tasks__list">
+                {tasks.map(task => (
+                    <TaskPreview key={task._id} task={task} />
+                ))}
+            </div>
             {isLoading && <Loader />}
         </div>
     );
