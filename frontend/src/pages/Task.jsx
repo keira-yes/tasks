@@ -2,14 +2,19 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { getTask, reset } from "../features/tasks/tasksSlice";
+import { IoPricetagsOutline } from "react-icons/io5";
+import { getTask } from "../features/tasks/tasksSlice";
 import Loader from "../components/Loader";
 import BackNavigation from "../components/BackNavigation";
 
 const Task = () => {
     const dispatch = useDispatch();
     const { taskId } = useParams();
-    const { task, isLoading, isSuccess, errorMessage } = useSelector((state) => state.tasks);
+    const {
+        task: {status, createdAt, description, category, _id},
+        isLoading,
+        errorMessage
+    } = useSelector((state) => state.tasks);
 
     useEffect(() => {
         if (errorMessage) {
@@ -22,10 +27,20 @@ const Task = () => {
     if (isLoading) return <Loader />
 
     return (
-        <div className="task">
+        <>
             <BackNavigation url="/tasks" />
-            <h1 className="task__title page-title">Task</h1>
-        </div>
+            <div className="task">
+                <header className="task__header">
+                    <span className={`task__category category category--${category}`}><IoPricetagsOutline /> {category}</span>
+                    <span className={`task__status status status--${status}`}>{status}</span>
+                </header>
+                <h1 className="task__title">{description}</h1>
+                <div className="task__content">
+                    <p className="task__info"><strong>Task ID:</strong> {_id}</p>
+                    <p className="task__info"><strong>Created:</strong> {new Date(createdAt).toLocaleString()}</p>
+                </div>
+            </div>
+        </>
     );
 };
 

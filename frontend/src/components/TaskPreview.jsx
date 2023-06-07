@@ -7,12 +7,12 @@ const TaskPreview = ({ task }) => {
     return (
         <div className="card">
             <div className="card__content">
-                <span className={`card__status card__status--${status}`}>{status}</span>
-                <span className="card__date">{new Date(createdAt).toLocaleString()}</span>
+                <span className={`card__status status status--${status}`}>{status}</span>
+                <span className="card__date date">{new Date(createdAt).toLocaleString()}</span>
                 <p className="card__description">{description}</p>
             </div>
             <div className="card__info">
-                <span className={`card__category card__category--${category}`}><IoPricetagsOutline /> {category}</span>
+                <span className={`card__category category category--${category}`}><IoPricetagsOutline /> {category}</span>
                 <Link to={`/tasks/${_id}`} className="btn btn--accent btn--sm">View</Link>
             </div>
         </div>

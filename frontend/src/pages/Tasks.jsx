@@ -29,15 +29,17 @@ const Tasks = () => {
     if (isLoading) return <Loader />
 
     return (
-        <div className="tasks">
+        <>
             <BackNavigation url="/" />
-            <h1 className="tasks__title page-title">Tasks</h1>
-            <div className="tasks__list">
-                {tasks.map(task => (
-                    <TaskPreview key={task._id} task={task} />
-                ))}
+            <div className="tasks">
+                <h1 className="tasks__title page-title">Tasks</h1>
+                <div className="tasks__list">
+                    {tasks.map(task => (
+                        <TaskPreview key={task._id} task={task} />
+                    ))}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
