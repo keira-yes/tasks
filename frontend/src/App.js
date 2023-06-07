@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NewTask from "./pages/NewTask";
 import Tasks from "./pages/Tasks";
+import Task from "./pages/Task";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import PrivateRoute from "./components/PrivateRoute";
@@ -26,6 +27,9 @@ function App() {
                             </Route>
                             <Route path="/tasks" element={<PrivateRoute />}>
                                 <Route path="/tasks" element={<Tasks />} />
+                            </Route>
+                            <Route path="/tasks/:taskId" element={<PrivateRoute />}>
+                                <Route path="/tasks/:taskId" element={<Task />} />
                             </Route>
                         </Routes>
                     </div>

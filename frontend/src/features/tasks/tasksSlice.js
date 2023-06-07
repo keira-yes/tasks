@@ -40,7 +40,7 @@ export const getTask = createAsyncThunk(
     async (taskId, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token;
-            return await tasksAPI.getTasks(taskId, token);
+            return await tasksAPI.getTask(taskId, token);
         } catch (error) {
             const message = error.response?.data?.message || error.message || error.toString();
             return thunkAPI.rejectWithValue(message);

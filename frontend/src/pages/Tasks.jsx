@@ -26,6 +26,8 @@ const Tasks = () => {
         dispatch(getTasks());
     }, [errorMessage, dispatch]);
 
+    if (isLoading) return <Loader />
+
     return (
         <div className="tasks">
             <BackNavigation url="/" />
@@ -35,7 +37,6 @@ const Tasks = () => {
                     <TaskPreview key={task._id} task={task} />
                 ))}
             </div>
-            {isLoading && <Loader />}
         </div>
     );
 };
