@@ -19,11 +19,11 @@ const Tasks = () => {
     }, [isSuccess, dispatch]);
 
     useEffect(() => {
-        dispatch(getTasks());
-
         if (errorMessage) {
             toast.error(errorMessage);
         }
+
+        dispatch(getTasks());
     }, [errorMessage, dispatch]);
 
     return (
