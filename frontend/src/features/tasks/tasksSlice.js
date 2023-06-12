@@ -48,6 +48,19 @@ export const getTask = createAsyncThunk(
     }
 );
 
+export const closeTask = createAsyncThunk(
+    "tasks/close",
+    async (taskId, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.token;
+            return await tasksAPI.closeTask(taskId, token);
+        } catch (error) {
+            const message = error.response?.data?.message || error.message || error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
 const tasksSlice = createSlice({
     name: "task",
     initialState,
@@ -85,9 +98,19 @@ const tasksSlice = createSlice({
             .addCase(getTask.fulfilled, (state, action) => {
                 state.task = action.payload;
                 state.isLoading = false;
-                state.isSuccess = true;
             })
             .addCase(getTask.rejected, (state, action) => {
+                state.isLoading = false;
+                state.errorMessage = action.payload
+            })
+            .addCase(closeTask.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(closeTask.fulfilled, (state) => {
+                state.isLoading = false;
+                state.task.status = "done";
+            })
+            .addCase(closeTask.rejected, (state, action) => {
                 state.isLoading = false;
                 state.errorMessage = action.payload
             })

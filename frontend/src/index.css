@@ -335,6 +335,17 @@ h6 {
     text-decoration: underline;
 }
 
+.btn--bordered {
+    border-color: #FF5B5B;
+    background-color: rgba(255, 91, 91, 0.15);
+    color: #FF5B5B;
+}
+
+.btn--bordered:hover {
+    background-color: #FF5B5B;
+    color: #fff;
+}
+
 .btn--sm {
     min-width: initial;
     padding: 10px 20px;
@@ -532,7 +543,13 @@ h6 {
 }
 
 .status--new {
-    background-color: #D0D6DE;
+    background-color: rgba(46, 214, 163, 0.15);
+    color: #00A389;
+}
+
+.status--done {
+    background-color: #FF5B5B;
+    color: #fff;
 }
 
 /* Task ***************************************************************************************/
@@ -546,6 +563,11 @@ h6 {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+}
+
+.task__footer {
+    justify-content: center;
+    margin-top: 40px;
 }
 
 /* Card ****************************************************************************************/

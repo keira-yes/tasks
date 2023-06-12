@@ -32,10 +32,21 @@ const getTask = async (taskId, token) => {
     return response.data;
 }
 
+const closeTask = async (taskId, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    const response = await axios.put(`${API_URL}/${taskId}`, { status: "done" }, config);
+    return response.data;
+}
+
 const tasksAPI = {
     createTask,
     getTasks,
-    getTask
+    getTask,
+    closeTask
 };
 
 export default tasksAPI;

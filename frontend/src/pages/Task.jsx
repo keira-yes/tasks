@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { IoPricetagsOutline } from "react-icons/io5";
-import { getTask } from "../features/tasks/tasksSlice";
+import { getTask, closeTask } from "../features/tasks/tasksSlice";
 import Loader from "../components/Loader";
 import BackNavigation from "../components/BackNavigation";
 
@@ -24,6 +24,11 @@ const Task = () => {
         dispatch(getTask(taskId));
     }, [taskId, errorMessage, dispatch]);
 
+    const onCloseTask = () => {
+        dispatch(closeTask(taskId));
+        toast.success("Task was successfully closed");
+    }
+
     if (isLoading) return <Loader />
 
     return (
@@ -39,6 +44,17 @@ const Task = () => {
                     <p className="task__info"><strong>Task ID:</strong> {_id}</p>
                     <p className="task__info"><strong>Created:</strong> {new Date(createdAt).toLocaleString()}</p>
                 </div>
+                {status !== "done" && (
+                    <footer className="task__footer">
+                        <button
+                            type="button"
+                            className="task__btn btn btn--bordered"
+                            onClick={onCloseTask}
+                        >
+                            Close task
+                        </button>
+                    </footer>
+                )}
             </div>
         </>
     );
