@@ -1,14 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { IoPricetagsOutline } from "react-icons/io5";
-import { getTask, closeTask } from "../features/tasks/tasksSlice";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import {getTask, closeTask, deleteTask} from "../features/tasks/tasksSlice";
 import Loader from "../components/Loader";
 import BackNavigation from "../components/BackNavigation";
 
 const Task = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { taskId } = useParams();
     const {
         task: {status, createdAt, description, category, _id},
@@ -29,6 +31,12 @@ const Task = () => {
         toast.success("Task was successfully closed");
     }
 
+    const onDeleteTask = () => {
+        dispatch(deleteTask(taskId));
+        toast.success("Task was successfully deleted");
+        navigate("/tasks");
+    }
+
     if (isLoading) return <Loader />
 
     return (
@@ -37,7 +45,16 @@ const Task = () => {
             <div className="task">
                 <header className="task__header">
                     <span className={`task__category category category--${category}`}><IoPricetagsOutline /> {category}</span>
-                    <span className={`task__status status status--${status}`}>{status}</span>
+                    <div className="task__header-block">
+                        <span className={`task__status status status--${status}`}>{status}</span>
+                        <button
+                            type="button"
+                            className="task__delete"
+                            onClick={onDeleteTask}
+                        >
+                            <RiDeleteBin6Line />
+                        </button>
+                    </div>
                 </header>
                 <h1 className="task__title">{description}</h1>
                 <div className="task__content">

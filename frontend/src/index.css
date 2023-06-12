@@ -565,8 +565,26 @@ h6 {
     margin-bottom: 20px;
 }
 
-.task__footer {
+.task__header-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.task__delete {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    font-size: 24px;
+    color: #A3A3A3;
+}
+
+.task__footer {
     margin-top: 40px;
 }
 
